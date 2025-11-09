@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The Nun — Demo</title>
+  <style>
+    /* Reset sederhana */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html,body { height:100%; font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; color:#111; background:#fff; }
+
+    /* Container umum */
+    .page {
+      max-width:1100px;
+      margin: 36px auto;
+      padding: 24px;
+      display: grid;
+      gap: 36px;
+    }
+
+    /* Header/nav */
+    header {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+    }
+    .brand { font-size:14px; color:#333; }
+    nav {
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .nav-pill {
+      display:flex;
+      gap:8px;
+      align-items:center;
+      background:transparent;
+      padding:6px 12px;
+      border-radius:999px;
+      border:1px solid #d6d6d6;
+    }
+    .nav-pill a {
+      padding:8px 18px;
+      border-radius:999px;
+      text-decoration:none;
+      font-size:14px;
+      color:#333;
+    }
+    .nav-pill a.active {
+      background:#111;
+      color:#fff;
+      box-shadow: 0 2px 0 rgba(0,0,0,0.06) inset;
+    }
+
+    /* Section layout like wireframe: left content + right image */
+    .section {
+      border-top:8px solid transparent; /* spacing between sections in image */
+      padding-top:18px;
+      padding-bottom:18px;
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:28px;
+      align-items:center;
+    }
+
+    /* Big title */
+    .title {
+      font-size:72px;
+      font-weight:700;
+      letter-spacing:1px;
+      margin-bottom:18px;
+    }
+
+    /* Button list (pills) */
+    .movie-options {
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      width:360px;
+      max-width:100%;
+    }
+    .pill {
+      padding:12px 18px;
+      border-radius:999px;
+      border:2px solid #bfbfbf;
+      background:transparent;
+      text-align:center;
+      cursor:pointer;
+      font-weight:600;
+      transition: all .15s ease;
+    }
+    .pill:hover { transform: translateY(-2px); }
+    .pill.active {
+      background:#111;
+      color:#fff;
+      border-color:#111;
+    }
+
+    /* Quote */
+    .quote {
+      margin-top:18px;
+      font-style:italic;
+      color:#333;
+    }
+
+    /* Right image placeholder */
+    .right-img {
+      height:220px;
+      border-radius:6px;
+      border:2px dashed #cfcfcf;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#777;
+      font-weight:600;
+      background: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.01));
+    }
+
+    /* Info card variation (third/fourth screen) */
+    .info-card {
+      width:380px;
+      padding:18px;
+      border-radius:12px;
+      background:#efefef;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+    }
+    .info-card h3 {
+      font-size:20px;
+      margin-bottom:8px;
+    }
+    .info-card p.meta {
+      font-size:13px;
+      color:#666;
+      margin-bottom:12px;
+    }
+    .card-actions {
+      display:flex;
+      gap:10px;
+    }
+    .btn {
+      padding:8px 14px;
+      border-radius:999px;
+      border:1px solid #bdbdbd;
+      background:white;
+      cursor:pointer;
+      font-weight:600;
+    }
+
+    /* Small screens: stack columns */
+    @media (max-width:900px){
+      .section { grid-template-columns: 1fr; }
+      .right-img { order: -1; height:200px; margin-bottom:12px; }
+      .title { font-size:44px; }
+      .movie-options { width:100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- Header -->
+    <header>
+      <div class="brand">Where to Watch</div>
+      <nav>
+        <div class="nav-pill" role="navigation" aria-label="Main navigation">
+          <a href="#" class="active" data-target="home">Home</a>
+          <a href="#" data-target="universe">Universe</a>
+          <a href="#" data-target="about">About Us</a>
+          <a href="#" data-target="contact">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Section 1 (wireframe top) -->
+    <section class="section" id="home">
+      <div>
+        <div class="title">THE NUN</div>
+
+        <div class="movie-options" role="tablist" aria-label="Pilih versi film">
+          <button class="pill active" data-film="thenun">The Nun</button>
+          <button class="pill" data-film="thenun2">The Nun 2</button>
+        </div>
+
+        <div class="quote">“Step into the shadows and connect with the world of The Nun.”</div>
+      </div>
+
+      <aside class="right-img" aria-hidden="true">
+        foto the nun
+      </aside>
+    </section>
+
+    <!-- Section 2 (active pill dark style preview) -->
+    <section class="section">
+      <div>
+        <div class="title">THE NUN</div>
+
+        <!-- demonstrate active pill dark -->
+        <div class="movie-options">
+          <button class="pill active" data-film="thenun">The Nun</button>
+          <button class="pill" data-film="thenun2">The Nun 2</button>
+        </div>
+
+      </div>
+
+      <aside class="right-img">
+        foto the nun
+      </aside>
+    </section>
+
+    <!-- Section 3 (info card on left, image on right) -->
+    <section class="section">
+      <div>
+        <div class="info-card" id="infoCard">
+          <h3>THE NUN | 2018</h3>
+          <p class="meta">Keterangan singkat tentang film. XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXX</p>
+          <div class="card-actions">
+            <button class="btn" id="seeCharacter">See Character</button>
+            <button class="btn" id="backHome">Back to Home</button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="right-img">
+        gambar film the nun
+      </aside>
+    </section>
+
+    <!-- Section 4 (another card example) -->
+    <section class="section">
+      <div>
+        <div class="info-card">
+          <h3>THE NUN | 2018</h3>
+          <p class="meta">Deskripsi versi lain, contoh teks placeholder.</p>
+          <div class="card-actions">
+            <button class="btn">See Character</button>
+            <button class="btn">Back to Home</button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="right-img">
+        gambar film the nun
+      </aside>
+    </section>
+
+  </div>
+
+  <script>
+    // Interaksi sederhana: toggle active pada pill, update info card konten
+    document.querySelectorAll('.pill').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        document.querySelectorAll('.pill').forEach(b => b.classList.remove('active'));
+        e.currentTarget.classList.add('active');
+
+        const film = e.currentTarget.dataset.film;
+        const infoCard = document.getElementById('infoCard');
+
+        if(infoCard){
+          if(film === 'thenun'){
+            infoCard.querySelector('h3').textContent = 'THE NUN | 2018';
+            infoCard.querySelector('.meta').textContent = 'Seorang biarawati yang misterius terhubung ke peristiwa supranatural di sebuah biara Rumania.';
+          } else if(film === 'thenun2'){
+            infoCard.querySelector('h3').textContent = 'THE NUN 2 | 2023';
+            infoCard.querySelector('.meta').textContent = 'Lanjutan kisah kengerian — kegelapan kembali berburu para korban yang tidak bersalah.';
+          }
+        }
+      });
+    });
+
+    // Nav simple: highlight active nav
+    document.querySelectorAll('nav a').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelectorAll('nav a').forEach(x => x.classList.remove('active'));
+        e.currentTarget.classList.add('active');
+
+        // optional: scroll to section with same id as data-target
+        const target = e.currentTarget.dataset.target;
+        if(target){
+          const el = document.getElementById(target);
+          if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+        }
+      });
+    });
+
+    // Card buttons demo
+    document.getElementById('seeCharacter')?.addEventListener('click', () => {
+      alert('Tombol "See Character" diklik — bisa dialihkan ke halaman karakter.');
+    });
+    document.getElementById('backHome')?.addEventListener('click', () => {
+      document.getElementById('home').scrollIntoView({behavior:'smooth'});
+    });
+  </script>
+</body>
+</html>
