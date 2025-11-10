@@ -4,13 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Nun Universe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Cinzel', sans-serif;
     }
 
     body {
@@ -23,28 +26,28 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 60px;
+      padding: 50px 60px;
       font-weight: 500;
-      background: rgba(0, 0, 0, 0.7);
+      background: transparent;
       position: fixed;
       width: 100%;
       z-index: 1000;
-      backdrop-filter: blur(10px);
     }
 
     header div {
-      font-weight: 600;
-      letter-spacing: 1px;
+      font-size: 20px;
+      letter-spacing: 2px;
     }
 
     nav a {
       text-decoration: none;
       color: #f2f2f2;
-      margin-left: 20px;
+      margin-left: 30px;
       border: 1px solid #f2f2f2;
       border-radius: 20px;
-      padding: 6px 18px;
+      padding: 6px 20px;
       transition: 0.3s;
+      font-size: 15px;
     }
 
     nav a:hover, nav a.active {
@@ -55,11 +58,11 @@
     .container {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
       height: 100vh;
       text-align: center;
-      background: url('https://i.ibb.co/7ryJy0D/the-nun-bg.jpg') center/cover no-repeat;
+      background: url('images/HOMEPAGE3.jpg') center/cover no-repeat;
       position: relative;
       transition: opacity 0.8s ease-in-out;
     }
@@ -75,26 +78,28 @@
     }
 
     .container h1 {
-      font-size: 80px;
+      font-size: 150px;
       font-weight: 800;
       letter-spacing: 2px;
       z-index: 2;
       position: relative;
       text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+      padding-left: 180px;
     }
 
     .buttons {
-      margin-top: 50px;
+      margin-top: 20px;
+      margin-left: 400px;
       z-index: 2;
       position: relative;
     }
 
     .buttons button {
       display: block;
-      width: 220px;
+      width: 300px;
       margin: 15px auto;
       padding: 14px 25px;
-      font-size: 18px;
+      font-size: 25px;
       border: 1px solid #f2f2f2;
       border-radius: 25px;
       background: transparent;
@@ -109,11 +114,13 @@
     }
 
     .tagline {
-      margin-top: 50px;
+      margin-top: 70px;
       font-style: italic;
+      font-size: 25px;
       color: #ddd;
       z-index: 2;
       position: relative;
+      padding-left: 150px;
     }
 
     .content {
@@ -121,7 +128,16 @@
       height: 100vh;
       padding: 120px 60px;
       animation: fadeIn 0.8s ease-in-out;
-      background: linear-gradient(to bottom right, #111, #1c1c1c);
+    }
+
+    #nun1.content {
+      background: url('images/HOMEPAGE.jpg') center/cover no-repeat;
+      position: relative;
+    }
+
+    #nun2.content {
+      background: url('images/HOMEPAGE2.jpg') center/cover no-repeat;
+      position: relative;
     }
 
     .content.active {
@@ -179,6 +195,7 @@
     .back-btn:hover {
       background-color: #f2f2f2;
       color: #111;
+      
     }
 
     footer {
@@ -192,12 +209,12 @@
 </head>
 <body>
   <header>
-    <div>THE NUN UNIVERSE</div>
+    <div>WHERE TO WATCH</div>
     <nav>
-      <a href="#" class="active">Home</a>
-      <a href="#">Universe</a>
-      <a href="#">About</a>
-      <a href="#">Contact</a>
+      <a href="#" class="active">HOME</a>
+      <a href="#">UNIVERSE</a>
+      <a href="#">ABOUT</a>
+      <a href="#">CONTACT</a>
     </nav>
   </header>
 
@@ -212,7 +229,6 @@
 
   <div class="content" id="nun1">
     <div class="movie-box">
-      <img src="https://i.ibb.co/Qm4gL0k/the-nun-poster.jpg" alt="The Nun 2018">
       <h2>THE NUN (2018)</h2>
       <p>Set in 1952 Romania, a priest and a novice are sent by the Vatican to investigate the mysterious death of a nun at the Cârța Monastery. What they uncover is a dark secret — the demon Valak, taking the form of a terrifying nun. The movie serves as a prequel to The Conjuring series, exploring the origins of one of its most feared entities.</p>
       <button class="back-btn" onclick="goBack()">Back to Home</button>
@@ -221,7 +237,6 @@
 
   <div class="content" id="nun2">
     <div class="movie-box">
-      <img src="https://i.ibb.co/5RBSxxN/the-nun2-poster.jpg" alt="The Nun II 2023">
       <h2>THE NUN II (2023)</h2>
       <p>Four years after the events of the first film, Sister Irene once again faces the demonic Valak in France. The sequel expands the lore of The Conjuring Universe, blending gothic horror with an emotional story of faith and courage. This chapter deepens the haunting mythos and tests the limits of Sister Irene’s strength and belief.</p>
       <button class="back-btn" onclick="goBack()">Back to Home</button>
@@ -229,7 +244,7 @@
   </div>
 
   <footer>
-    &copy; 2025 The Nun Universe | Fan Concept Website by GaiaPherga
+    &copy; 2025 The Nun Universe | Fan Concept Website by Kelompok 3
   </footer>
 
   <script>
