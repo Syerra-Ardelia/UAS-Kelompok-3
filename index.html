@@ -174,15 +174,19 @@
     .movie-box p {
       color: #ccc;
       line-height: 1.7;
-      font-size: 16px;
+      font-size: 20px;
       text-align: justify;
     }
 
     .back-btn {
       margin-top: 40px;
-      display: block;
+      display: flex;
+      z-index: 2;
+      position: relative;
+      justify-content: center;
       border: 1px solid #f2f2f2;
       border-radius: 20px;
+      font-size: 20px;
       padding: 12px 25px;
       background: transparent;
       cursor: pointer;
@@ -301,6 +305,7 @@
       <h2>THE NUN (2018)</h2>
       <p>Set in 1952 Romania, a priest and a novice are sent by the Vatican to investigate the mysterious death of a nun at the Cârța Monastery. What they uncover is a dark secret — the demon Valak, taking the form of a terrifying nun. The movie serves as a prequel to The Conjuring series, exploring the origins of one of its most feared entities.</p>
       <button class="back-btn" onclick="goBack()">Back to Home</button>
+      <button class="back-btn" onclick="showContent('nun2')">See Character</button>
     </div>
   </div>
 
@@ -309,6 +314,7 @@
       <h2>THE NUN II (2023)</h2>
       <p>Four years after the events of the first film, Sister Irene once again faces the demonic Valak in France. The sequel expands the lore of The Conjuring Universe, blending gothic horror with an emotional story of faith and courage. This chapter deepens the haunting mythos and tests the limits of Sister Irene’s strength and belief.</p>
       <button class="back-btn" onclick="goBack()">Back to Home</button>
+      <button class="back-btn" onclick="showContent('nun2')">See Character</button>
     </div>
   </div>
 
