@@ -58,13 +58,14 @@
     .container {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      align-items: flex-start; /* biar elemen ke kiri */
       justify-content: center;
       height: 100vh;
-      text-align: center;
-      background: url('images/HOMEPAGE3.jpg') center/cover no-repeat;
+      text-align: left; /* teks juga rata kiri */
+     background: url('images/HOMEPAGE3.jpg') center/cover no-repeat;
       position: relative;
       transition: opacity 0.8s ease-in-out;
+      padding-left: 120px; /* jarak dari sisi kiri biar ga nempel banget */
     }
 
     .container::after {
@@ -87,9 +88,20 @@
       padding-left: 180px;
     }
 
+    .logo {
+      width: 500px;
+      max-width: 80%;
+      display: block;
+      margin-left: 120px; 
+      z-index: 2;
+      position: relative;
+      filter: drop-shadow(2px 2px 10px rgba(0,0,0,0.8));
+    }
+
+
     .buttons {
       margin-top: 20px;
-      margin-left: 400px;
+     margin-left: 220px;
       z-index: 2;
       position: relative;
     }
@@ -114,14 +126,14 @@
     }
 
     .tagline {
-      margin-top: 70px;
+      margin-top: 50px;
+      margin-left: 1px; 
       font-style: italic;
-      font-size: 25px;
+      font-size: 23px;
       color: #ddd;
       z-index: 2;
-      position: relative;
-      padding-left: 150px;
-    }
+      
+  }
 
     .content {
       display: none;
@@ -174,19 +186,15 @@
     .movie-box p {
       color: #ccc;
       line-height: 1.7;
-      font-size: 20px;
+      font-size: 16px;
       text-align: justify;
     }
 
     .back-btn {
       margin-top: 40px;
-      display: flex;
-      z-index: 2;
-      position: relative;
-      justify-content: center;
+      display: block;
       border: 1px solid #f2f2f2;
       border-radius: 20px;
-      font-size: 20px;
       padding: 12px 25px;
       background: transparent;
       cursor: pointer;
@@ -220,14 +228,13 @@
   }
 
   header div {
-    font-size: 10px;
-    align-items: center;
+    font-size: 18px;
   }
 
   nav a {
-    font-size: 10px;
-    margin-left: 5px;
-    padding: 6px 6px;
+    font-size: 14px;
+    margin-left: 10px;
+    padding: 6px 12px;
   }
 
   .container {
@@ -292,7 +299,7 @@
   </header>
 
   <div class="container" id="home">
-    <h1>THE NUN</h1>
+    <img src="images\The_Nun_Movie_Logo.png" alt="The Nun Logo" class="logo">
     <div class="buttons">
       <button onclick="showContent('nun1')">The Nun (2018)</button>
       <button onclick="showContent('nun2')">The Nun II (2023)</button>
@@ -301,20 +308,18 @@
   </div>
 
   <div class="content" id="nun1">
-    <div class="movie-box">
-      <h2>THE NUN (2018)</h2>
-      <p>Set in 1952 Romania, a priest and a novice are sent by the Vatican to investigate the mysterious death of a nun at the Cârța Monastery. What they uncover is a dark secret — the demon Valak, taking the form of a terrifying nun. The movie serves as a prequel to The Conjuring series, exploring the origins of one of its most feared entities.</p>
-      <button class="back-btn" onclick="goBack()">Back to Home</button>
-      <button class="back-btn" onclick="showContent('nun2')">See Character</button>
-    </div>
+  <div class="movie-box">
+    <h2>THE NUN (2018)</h2>
+    <p>Set in 1952 Romania, a priest and a novice are sent by the Vatican to investigate the mysterious death of a nun at the Cârța Monastery. What they uncover is a dark secret — the demon Valak, taking the form of a terrifying nun. The movie serves as a prequel to The Conjuring series, exploring the origins of one of its most feared entities.</p>
+    <button class="back-btn" onclick="goBack()">Back to Home</button>
   </div>
+</div>
 
   <div class="content" id="nun2">
     <div class="movie-box">
       <h2>THE NUN II (2023)</h2>
       <p>Four years after the events of the first film, Sister Irene once again faces the demonic Valak in France. The sequel expands the lore of The Conjuring Universe, blending gothic horror with an emotional story of faith and courage. This chapter deepens the haunting mythos and tests the limits of Sister Irene’s strength and belief.</p>
       <button class="back-btn" onclick="goBack()">Back to Home</button>
-      <button class="back-btn" onclick="showContent('nun2')">See Character</button>
     </div>
   </div>
 
