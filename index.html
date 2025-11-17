@@ -1,269 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>The Nun Universe</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Cinzel', sans-serif;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cinzel', sans-serif; }
+    body { background-color: #0a0a0a; color: #f2f2f2; overflow-x: hidden; }
 
-    body {
-      background-color: #0a0a0a;
-      color: #f2f2f2;
-      overflow-x: hidden;
-    }
+    header { display: flex; justify-content: space-between; align-items: center; padding: 50px 60px; font-weight: 500; background: transparent; position: fixed; width: 100%; z-index: 1000; }
+    header div { font-size: 20px; letter-spacing: 2px; cursor: pointer; }
+    nav a { text-decoration: none; color: #f2f2f2; margin-left: 30px; border: 1px solid #f2f2f2; border-radius: 20px; padding: 6px 20px; transition: 0.3s; font-size: 15px; }
+    nav a:hover, nav a.active { background-color: #f2f2f2; color: #111; }
 
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 50px 60px;
-      font-weight: 500;
-      background: transparent;
-      position: fixed;
-      width: 100%;
-      z-index: 1000;
-    }
+    .container { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; height: 100vh; background: url('images/HOMEPAGE3.jpg') center/cover no-repeat; position: relative; padding-left: 120px; }
+    .container::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.6); }
+    .logo { width: 500px; max-width: 80%; display: block; margin-left: 120px; z-index: 2; position: relative; filter: drop-shadow(2px 2px 10px rgba(0,0,0,0.8)); }
 
-    header div {
-      font-size: 20px;
-      letter-spacing: 2px;
-    }
+    .buttons { margin-top: 20px; margin-left: 400px; z-index: 2; position: relative; }
+    .buttons button { display: block; width: 300px; margin: 15px auto; padding: 14px 25px; font-size: 25px; border: 1px solid #f2f2f2; border-radius: 25px; background: transparent; color: #f2f2f2; cursor: pointer; transition: 0.3s; }
+    .buttons button:hover { background-color: #f2f2f2; color: #111; }
 
-    nav a {
-      text-decoration: none;
-      color: #f2f2f2;
-      margin-left: 30px;
-      border: 1px solid #f2f2f2;
-      border-radius: 20px;
-      padding: 6px 20px;
-      transition: 0.3s;
-      font-size: 15px;
-    }
+    .tagline { margin-top: 70px; font-style: italic; font-size: 25px; color: #ddd; z-index: 2; position: relative; padding-left: 150px; }
 
-    nav a:hover, nav a.active {
-      background-color: #f2f2f2;
-      color: #111;
-    }
+    .content { display: none; height: 100vh; padding: 120px 60px; }
+    .content.active { display: block; }
+    #nun1 { background: url('images/HOMEPAGE.jpg') center/cover no-repeat; }
+    #nun2 { background: url('images/HOMEPAGE2.jpg') center/cover no-repeat; }
 
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-      background: url('images/HOMEPAGE3.jpg') center/cover no-repeat;
-      position: relative;
-      transition: opacity 0.8s ease-in-out;
-    }
+    .movie-box { background-color: rgba(255,255,255,0.05); border-radius: 20px; padding: 40px; width: 80%; max-width: 900px; margin: auto; box-shadow: 0 0 20px rgba(255,255,255,0.1); }
+    .movie-box p { color: #ccc; line-height: 1.7; font-size: 16px; text-align: justify; }
 
-    .container::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.6);
-    }
+    .btn { margin-top: 15px; display: block; border: 1px solid #f2f2f2; border-radius: 20px; padding: 12px 25px; background: #f2f2f2; cursor: pointer; color: #111; transition: 0.3s; margin-left: auto; margin-right: auto; font-size: 18px; font-weight: 600; }
+    .btn:hover { background: transparent; color: #f2f2f2; }
 
-    .container h1 {
-      font-size: 150px;
-      font-weight: 800;
-      letter-spacing: 2px;
-      z-index: 2;
-      position: relative;
-      text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
-      padding-left: 180px;
-    }
+    #charPopup { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 2000; }
+    #charPopup .popup-box { background: #111; padding: 30px; border-radius: 20px; width: 520px; text-align: center; box-shadow: 0 0 20px rgba(255,255,255,0.3); position: relative; }
 
-    .buttons {
-      margin-top: 20px;
-      margin-left: 400px;
-      z-index: 2;
-      position: relative;
-    }
+    #charList { max-width: 100%; overflow-x: auto; white-space: nowrap; margin-top: 25px; padding-bottom: 10px; scroll-behavior: smooth; }
+    .charCard { display: inline-block; width: 170px; height: 260px; margin: 0 12px; border-radius: 15px; overflow: hidden; border: 2px solid #444; box-shadow: 0 0 10px rgba(255,255,255,0.2); background-size: cover; background-position: center; position: relative; }
+    .charCard span { position: absolute; bottom: 0; left: 0; right: 0; padding: 8px; font-size: 15px; background: rgba(0,0,0,0.6); }
 
-    .buttons button {
-      display: block;
-      width: 300px;
-      margin: 15px auto;
-      padding: 14px 25px;
-      font-size: 25px;
-      border: 1px solid #f2f2f2;
-      border-radius: 25px;
-      background: transparent;
-      color: #f2f2f2;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+    .arrow { position: absolute; top: 50%; transform: translateY(-50%); font-size: 40px; cursor: pointer; color: #fff; padding: 10px; user-select: none; }
+    #leftArrow { left: -50px; }
+    #rightArrow { right: -50px; }
 
-    .buttons button:hover, .buttons button.active {
-      background-color: #f2f2f2;
-      color: #111;
-    }
-
-    .tagline {
-      margin-top: 70px;
-      font-style: italic;
-      font-size: 25px;
-      color: #ddd;
-      z-index: 2;
-      position: relative;
-      padding-left: 150px;
-    }
-
-    .content {
-      display: none;
-      height: 100vh;
-      padding: 120px 60px;
-      animation: fadeIn 0.8s ease-in-out;
-    }
-
-    #nun1.content {
-      background: url('images/HOMEPAGE.jpg') center/cover no-repeat;
-      position: relative;
-    }
-
-    #nun2.content {
-      background: url('images/HOMEPAGE2.jpg') center/cover no-repeat;
-      position: relative;
-    }
-
-    .content.active {
-      display: block;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .movie-box {
-      background-color: rgba(255,255,255,0.05);
-      border-radius: 20px;
-      padding: 40px;
-      width: 80%;
-      max-width: 900px;
-      margin: auto;
-      box-shadow: 0 0 20px rgba(255,255,255,0.1);
-    }
-
-    .movie-box img {
-      width: 100%;
-      border-radius: 20px;
-      margin-bottom: 25px;
-    }
-
-    .movie-box h2 {
-      font-size: 36px;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    .movie-box p {
-      color: #ccc;
-      line-height: 1.7;
-      font-size: 16px;
-      text-align: justify;
-    }
-
-    .back-btn {
-      margin-top: 40px;
-      display: block;
-      border: 1px solid #f2f2f2;
-      border-radius: 20px;
-      padding: 12px 25px;
-      background: transparent;
-      cursor: pointer;
-      color: #f2f2f2;
-      transition: 0.3s;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .back-btn:hover {
-      background-color: #f2f2f2;
-      color: #111;
-      
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 14px;
-      color: #999;
-      background: #0a0a0a;
-    }
+    footer { text-align: center; padding: 20px; font-size: 14px; color: #999; background: #0a0a0a; }
   </style>
 </head>
 <body>
-  <header>
-    <div>WHERE TO WATCH</div>
-    <nav>
-      <a href="#" class="active">HOME</a>
-      <a href="#">UNIVERSE</a>
-      <a href="#">ABOUT</a>
-      <a href="#">CONTACT</a>
-    </nav>
-  </header>
 
-  <div class="container" id="home">
-    <h1>THE NUN</h1>
-    <div class="buttons">
-      <button onclick="showContent('nun1')">The Nun (2018)</button>
-      <button onclick="showContent('nun2')">The Nun II (2023)</button>
-    </div>
-    <p class="tagline">“Step into the shadows and face the horror that binds them.”</p>
+<header>
+  <div id="homeHeader">WHERE TO WATCH</div>
+  <nav>
+    <a href="#" class="active" id="homeMenu">HOME</a>
+    <a href="#">UNIVERSE</a>
+    <a href="#">ABOUT</a>
+    <a href="#">CONTACT</a>
+  </nav>
+</header>
+
+<div class="container" id="home">
+  <img src="images/The_Nun_Movie_Logo.png" alt="The Nun Logo" class="logo">
+  <div class="buttons">
+    <button id="btnNun1">The Nun (2018)</button>
+    <button id="btnNun2">The Nun II (2023)</button>
   </div>
+  <p class="tagline">“Step into the shadows and face the horror that binds them.”</p>
+</div>
 
-  <div class="content" id="nun1">
-    <div class="movie-box">
-      <h2>THE NUN (2018)</h2>
-      <p>Set in 1952 Romania, a priest and a novice are sent by the Vatican to investigate the mysterious death of a nun at the Cârța Monastery. What they uncover is a dark secret — the demon Valak, taking the form of a terrifying nun. The movie serves as a prequel to The Conjuring series, exploring the origins of one of its most feared entities.</p>
-      <button class="back-btn" onclick="goBack()">Back to Home</button>
-    </div>
+<div class="content" id="nun1">
+  <div class="movie-box">
+    <h2>THE NUN (2018)</h2>
+    <p>Set in 1952 Romania, a priest and a novice are sent by the Vatican to investigate the mysterious death of a nun at the Cârța Monastery. What they uncover is a dark secret — the demon Valak, taking the form of a terrifying nun.</p>
+    <button class="btn" id="seeChar1">See Characters</button>
   </div>
+</div>
 
-  <div class="content" id="nun2">
-    <div class="movie-box">
-      <h2>THE NUN II (2023)</h2>
-      <p>Four years after the events of the first film, Sister Irene once again faces the demonic Valak in France. The sequel expands the lore of The Conjuring Universe, blending gothic horror with an emotional story of faith and courage. This chapter deepens the haunting mythos and tests the limits of Sister Irene’s strength and belief.</p>
-      <button class="back-btn" onclick="goBack()">Back to Home</button>
-    </div>
+<div class="content" id="nun2">
+  <div class="movie-box">
+    <h2>THE NUN II (2023)</h2>
+    <p>Four years after the events at the Abbey of St. Carta, Sister Irene once again faces the demonic force Valak as evil spreads across Europe.</p>
+    <button class="btn" id="seeChar2">See Characters</button>
   </div>
+</div>
 
-  <footer>
-    &copy; 2025 The Nun Universe | Fan Concept Website by Kelompok 3
-  </footer>
+<div id="charPopup">
+  <div class="popup-box">
+    <span id="closeX" style="position:absolute; top:15px; right:20px; font-size:28px; cursor:pointer; color:#fff;">✕</span>
+    <div id="leftArrow" class="arrow">❮</div>
+    <h2 id="charTitle">Characters</h2>
+    <div id="charList"></div>
+    <div id="rightArrow" class="arrow">❯</div>
+    <button class="btn" onclick="closePopup()">Close</button>
+  </div>
+</div>
 
-  <script>
-    function showContent(id) {
-      document.getElementById('home').style.opacity = '0';
-      setTimeout(() => {
-        document.getElementById('home').style.display = 'none';
-        document.querySelectorAll('.content').forEach(el => el.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-      }, 400);
-    }
+<footer>
+  &copy; 2025 The Nun Universe | Fan Concept Website by Kelompok 3
+</footer>
 
-    function goBack() {
-      document.querySelectorAll('.content').forEach(el => el.classList.remove('active'));
-      document.getElementById('home').style.display = 'flex';
-      setTimeout(() => {
-        document.getElementById('home').style.opacity = '1';
-      }, 100);
-    }
-  </script>
+<script>
+  document.getElementById('homeMenu').onclick = e => { e.preventDefault(); location.reload(); };
+  document.getElementById('homeHeader').onclick = () => location.reload();
+
+  document.getElementById('btnNun1').onclick = () => showContent('nun1');
+  document.getElementById('btnNun2').onclick = () => showContent('nun2');
+
+  function showContent(id) {
+    document.getElementById('home').style.display = 'none';
+    document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+
+  const imagesNun1 = [
+    { name: "Valak", img: "Valak the nun 1 copy.jpg" },
+    { name: "Maurice (Frenchie)", img: "Frenchie . The nun 1 copy.JPG" },
+    { name: "Sister Irene", img: "Sister irene . The nun 1 copy.jpg" },
+    { name: "Father Burke", img: "Father burke - the nun 1 copy.jpg" },
+    { name: "Sister Oana", img: "Sister oana copy.jpg" }
+  ];
+
+  const imagesNun2 = [
+    { name: "Maurice Theriault", img: "Maurice Theriault The Nun 2.jpg" },
+    { name: "Sister Debra", img: "Sister Debra The Nun 2.jpg" },
+    { name: "Sister Irene", img: "Sister Irene The Nun 2.jpg" },
+    { name: "Sophie", img: "Sophie The Nun 2.jpg" },
+    { name: "Valak", img: "Valak The Nun 2.jpg" }
+  ];
+
+  const popup = document.getElementById('charPopup');
+  const charList = document.getElementById('charList');
+  const charTitle = document.getElementById('charTitle');
+
+  document.getElementById('seeChar1').onclick = () => openPopup(imagesNun1, "The Nun (2018) – Characters");
+  document.getElementById('seeChar2').onclick = () => openPopup(imagesNun2, "The Nun II (2023) – Characters");
+  document.getElementById('closeX').onclick = closePopup;
+
+  function openPopup(data, title) {
+    popup.style.display = 'flex';
+    charList.innerHTML = "";
+    charTitle.innerText = title;
+    data.forEach(c => {
+      const card = document.createElement('div');
+      card.className = "charCard";
+      card.style.backgroundImage = `url('images/${c.img}')`;
+      card.innerHTML = `<span>${c.name}</span>`;
+      charList.appendChild(card);
+    });
+    charList.scrollLeft = 0;
+  }
+
+  function closePopup() { popup.style.display = "none"; }
+
+  document.getElementById('rightArrow').onclick = () => (charList.scrollLeft += 220);
+  document.getElementById('leftArrow').onclick  = () => (charList.scrollLeft -= 220);
+
+  charList.addEventListener('wheel', e => { e.preventDefault(); charList.scrollLeft += e.deltaY; });
+</script>
+
 </body>
 </html>
