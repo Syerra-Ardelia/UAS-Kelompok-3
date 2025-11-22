@@ -68,7 +68,7 @@
       justify-content: center;
       height: 100vh;
       text-align: center;
-      background: url(images/the_nun_2.jpg) center / cover no-repeat;
+      background: url(images/the_nun_1.jpg) center / cover no-repeat;
       position: relative;
       transition: opacity 0.8s ease-in-out;
       z-index: 1;
@@ -302,20 +302,20 @@
 <header>
   <div id="homeHeader">THE NUN UNIVERSE</div>
   <nav>
-    <a class="active" id="homeMenu">HOME</a>
-    <a id="universeMenu">UNIVERSE</a>
-    <a id="aboutMenu">ABOUT</a>
-    <a id="contactMenu">CONTACT</a>
+    <a class="active">HOME</a>
+    <a>UNIVERSE</a>
+    <a>ABOUT</a>
+    <a>CONTACT</a>
   </nav>
 </header>
 
-<div class="content" id="nun2">
+<div class="content" id="nun1">
   <div class="sinopsis-box">
-    <h1>THE NUN II (2023)</h1>
+    <h1>THE NUN (2018)</h1>
     <br></br>
-    <p>Five years after the events in Romania, Sister Irene is drawn back into danger when a chain of brutal deaths across Europe points to the resurgence of Valak. Meanwhile, Frenchie now working at an old boarding school in France unknowingly serves as Valak’s host, as the demon slowly tries to possess him fully. Irene must confront Valak once more, racing against time to save Frenchie and stop the demon before its power becomes unstoppable</p>
+    <p>In a remote Romanian abbey, a nun is found dead under mysterious circumstances, prompting the Vatican to send Father Burke and Sister Irene to investigate, with the help of a local villager named Frenchie. Inside the abbey, they uncover that an ancient demon called Valak has been unleashed and is terrorizing anyone who enters. After facing a series of terrifying supernatural events, they manage to seal Valak again using a relic containing the blood of Jesus though subtle signs hint that the evil hasn’t been completely destroyed.</p>
     <br></br>
-    <button class="btn" id="seeChar2">See Characters</button>
+    <button class="btn" id="seeChar1">See Characters</button>
   </div>
 </div>
 
@@ -347,11 +347,11 @@
 <script>
 /* ===== Character datasets ===== */
 const charsNun1 = [
-  { name: "Syerra", img: "images/Sister irene . The nun 1.jpg", desc: "A devout novice whose faith is tested by Valak's darkness." },
-  { name: "Mima", img: "images/Valak the nun 1.jpg", desc: "The demonic entity taking the terrifying form of a nun." },
-  { name: "Bina", img: "images/Frenchie . The nun 1.JPG", desc: "A loyal local who helps Sister Irene and the priest." },
-  { name: "Alya", img: "images/Father burke - the nun 1.jpg", desc: "A priest with knowledge of the occult, investigating the evil." },
-  { name: "Nadin", img: "images/Sister oana.jpg", desc: "A surviving sister who carries the monastery’s trauma." }
+  { name: "Sister Irene", img: "images/Sister irene . The nun 1.jpg", desc: "A devout novice whose faith is tested by Valak's darkness." },
+  { name: "Valak", img: "images/Valak the nun 1.jpg", desc: "The demonic entity taking the terrifying form of a nun." },
+  { name: "Maurice (Frenchie)", img: "images/Frenchie . The nun 1.JPG", desc: "A loyal local who helps Sister Irene and the priest." },
+  { name: "Father Burke", img: "images/Father burke - the nun 1.jpg", desc: "A priest with knowledge of the occult, investigating the evil." },
+  { name: "Sister Oana", img: "images/Sister oana.jpg", desc: "A surviving sister who carries the monastery’s trauma." }
 ];
 
 /* ===== DOM ===== */
@@ -411,7 +411,7 @@ popupClose.addEventListener('click', ()=> popup.style.display='none');
 globalNext.addEventListener('click', next);
 globalPrev.addEventListener('click', prev);
 
-document.getElementById('seeChar2').addEventListener('click', ()=>{
+document.getElementById('seeChar1').addEventListener('click', ()=>{
   currentSet = charsNun1;
   popup.style.display = 'flex';
   buildCarousel(currentSet);

@@ -60,7 +60,6 @@
     .fade { opacity: 0; }
 
     /* HOMEPAGE */
-    
     .content {
       display: flex;
       margin: 0;
@@ -69,25 +68,34 @@
       justify-content: center;
       height: 100vh;
       text-align: center;
-      background: url(images/The_Nun_1.jpg) center / cover no-repeat;
+      background: url(images/the_nun_1.jpg) center / cover no-repeat;
       position: relative;
       transition: opacity 0.8s ease-in-out;
+      z-index: 1;
     }
 
-    .container::after {
+    .content::after {
       content: '';
       position: absolute;
       inset: 0;
       background: rgba(0,0,0,0.10);
+      z-index: 0;
+    }
+
+    /* Biar isi content di atas overlay */
+    .content > * {
+      position: relative;
+      z-index: 2;
     }
 
     .content.active {
       display: block;
       opacity: 1;
+      z-index: 0;
     }
 
     .sinopsis-box {
-      background-color: rgba(112, 112, 112, 0.342);
+      background-color: rgba(107, 106, 106, 0.274);
       border-radius: 20px;
       padding: 75px;
       width: 80%;
@@ -135,6 +143,157 @@
       color: #999;
       background: #0a0a0a;
     }
+
+    #charPopup {
+      position:fixed;
+      inset:0;
+      display:none;
+      justify-content:center;
+      align-items:center;
+      background:rgba(0,0,0,0.86);
+      z-index:5000;
+    }
+
+    .popup-inner {
+      width:820px;
+      max-width:94%;
+      background:transparent;
+      display:flex;
+      align-items:center;
+      gap:18px;
+      position:relative;
+    }
+      
+    .carousel {
+      width:620px;
+      max-width:70vw;
+      height:420px;
+      background:#0e0e0e;
+      border-radius:16px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      overflow:hidden;
+      box-shadow:0 10px 40px rgba(0,0,0,0.6);
+    }
+    
+    .slide {
+      position:absolute;
+      inset:0;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      opacity:0;
+      transform:translateX(20px) scale(.99);
+      transition:opacity .35s ease, transform .35s ease;
+    }
+    
+    .slide.active {
+      opacity:1;
+      transform:translateX(0) scale(1);
+    }
+    
+    .slide img {
+      max-height:260px;
+      width:auto;
+      border-radius:10px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.6);
+    }
+    
+    .slide h3 {
+      margin-top:12px;
+      font-size:22px;
+    }
+    
+    .slide p {
+      margin-top:6px;
+      color:#ccc;
+      font-size:14px;
+      max-width:84%;
+      text-align:center;
+      font-family:'cinzel', sans-serif;
+      font-weight:300;
+    }
+
+    /* arrows (outside carousel) */
+    .nav-arrow {
+      font-size:48px;
+      color:#fff;
+      cursor:pointer;
+      user-select:none;
+      padding:8px;
+      background:rgba(0,0,0,0.2);
+      border-radius:10px;
+      transition:.18s;
+    }
+    
+    .nav-arrow:hover {
+      transform:scale(1.06);
+      background:rgba(255,255,255,0.06);
+    }
+    
+    /* dots */
+    .dots {
+      display:flex;
+      gap:8px;
+      margin-top:12px;
+      justify-content:center;
+    }
+    
+    .dot {
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:rgba(255,255,255,0.25);
+      cursor:pointer;
+      transition:.18s;
+    }
+    
+    .dot.active {
+      background:#f2f2f2;
+      transform:scale(1.15);
+    }
+    
+    /* info panel on right of carousel */
+    .info-panel {
+      width:240px;
+      color:#ddd;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      align-items:flex-start;
+    }
+    
+    .info-panel h2 {
+      font-size:30px;
+      margin-bottom:6px;
+    }
+    
+    .info-panel p {
+      font-size:20px;
+      color:#bbb;
+      line-height:1.5;
+      font-family:'cinzel', sans-serif;
+      font-weight:300;
+    }
+    .popup-close {
+      position:absolute;
+      top:-36px;
+      right:-10px;
+      font-size:34px;
+      color:#fff;
+      cursor:pointer;
+    }
+    
+    /* small screens adjustments */
+    @media (max-width:900px) {
+      .popup-inner { flex-direction:column; gap:12px; }
+      .info-panel { width:100%; padding:0 12px; text-align:center; align-items:center; }
+      .carousel { width:94vw; height:360px; }
+    }
   </style>
 </head>
 
@@ -143,10 +302,10 @@
 <header>
   <div id="homeHeader">THE NUN UNIVERSE</div>
   <nav>
-    <a href="#" id="homeMenu">HOME</a>
-    <a href="#" id="universeMenu">UNIVERSE</a>
-    <a href="#" id="aboutMenu">ABOUT</a>
-    <a href="#" id="contactMenu">CONTACT</a>
+    <a class="active" id="homeMenu">HOME</a>
+    <a id="universeMenu">UNIVERSE</a>
+    <a id="aboutMenu">ABOUT</a>
+    <a id="contactMenu">CONTACT</a>
   </nav>
 </header>
 
@@ -160,9 +319,105 @@
   </div>
 </div>
 
+<!-- CHARACTER POPUP (carousel model A) -->
+<div id="charPopup" aria-hidden="true">
+  <div class="popup-inner" role="dialog" aria-modal="true">
+    <div class="carousel" id="carousel"></div>
+
+    <div class="info-panel">
+      <div class="popup-close" id="popupClose">✕</div>
+      <h2 id="panelTitle">Characters</h2>
+      <p id="panelDesc">Character description will appear here.</p>
+      <div class="dots" id="dots"></div>
+    </div>
+  </div>
+
+  <div style="position:fixed;left:16px;top:50%;transform:translateY(-50%);z-index:5100;">
+    <div class="nav-arrow" id="globalPrev">❮</div>
+  </div>
+  <div style="position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:5100;">
+    <div class="nav-arrow" id="globalNext">❯</div>
+  </div>
+</div>
+
 <footer>
   &copy; 2025 The Nun Universe | Fan Concept Website by Kelompok 3
 </footer>
+
+<script>
+/* ===== Character datasets ===== */
+const charsNun1 = [
+  { name: "Sister Irene", img: "images/Sister irene . The nun 1.jpg", desc: "A devout novice whose faith is tested by Valak's darkness." },
+  { name: "Valak", img: "images/Valak the nun 1.jpg", desc: "The demonic entity taking the terrifying form of a nun." },
+  { name: "Maurice (Frenchie)", img: "images/Frenchie . The nun 1.JPG", desc: "A loyal local who helps Sister Irene and the priest." },
+  { name: "Father Burke", img: "images/Father burke - the nun 1.jpg", desc: "A priest with knowledge of the occult, investigating the evil." },
+  { name: "Sister Oana", img: "images/Sister oana.jpg", desc: "A surviving sister who carries the monastery’s trauma." }
+];
+
+/* ===== DOM ===== */
+const popup = document.getElementById('charPopup');
+const carousel = document.getElementById('carousel');
+const panelTitle = document.getElementById('panelTitle');
+const panelDesc = document.getElementById('panelDesc');
+const dotsWrap = document.getElementById('dots');
+const popupClose = document.getElementById('popupClose');
+const globalPrev = document.getElementById('globalPrev');
+const globalNext = document.getElementById('globalNext');
+
+let currentSet = [];
+let currentIndex = 0;
+let slides = [];
+
+function buildCarousel(set){
+  carousel.innerHTML = '';
+  dotsWrap.innerHTML = '';
+  slides = [];
+
+  set.forEach((c, idx) => {
+    const slide = document.createElement('div');
+    slide.className = 'slide';
+    slide.dataset.index = idx;
+    slide.innerHTML = `
+      <img src="${c.img}">
+      <h3>${c.name}</h3>
+      <p>${c.desc}</p>
+    `;
+    carousel.appendChild(slide);
+    slides.push(slide);
+
+    const dot = document.createElement('div');
+    dot.className = 'dot';
+    dot.dataset.index = idx;
+    dot.addEventListener('click', ()=>goTo(idx));
+    dotsWrap.appendChild(dot);
+  });
+
+  currentIndex = 0;
+  updateSlides();
+}
+
+function updateSlides(){
+  slides.forEach((s,i)=> s.classList.toggle('active', i===currentIndex));
+  Array.from(dotsWrap.children).forEach((d,i)=> d.classList.toggle('active', i===currentIndex));
+  panelTitle.textContent = currentSet[currentIndex].name;
+  panelDesc.textContent = currentSet[currentIndex].desc;
+}
+
+function next(){ currentIndex = (currentIndex+1)%currentSet.length; updateSlides(); }
+function prev(){ currentIndex = (currentIndex-1+currentSet.length)%currentSet.length; updateSlides(); }
+function goTo(i){ currentIndex=i; updateSlides(); }
+
+popupClose.addEventListener('click', ()=> popup.style.display='none');
+globalNext.addEventListener('click', next);
+globalPrev.addEventListener('click', prev);
+
+document.getElementById('seeChar1').addEventListener('click', ()=>{
+  currentSet = charsNun1;
+  popup.style.display = 'flex';
+  buildCarousel(currentSet);
+});
+</script>
+
 </body>
 </html>
 </html>
