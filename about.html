@@ -90,6 +90,13 @@
   .member-card:nth-child(2n){ transform: rotate(6deg) translateY(6px); }
   .member-card:hover{ transform: rotate(0deg) translateY(-8px) scale(1.03); box-shadow:0 20px 40px rgba(178,0,0,0.25); border-color: rgba(178,0,0,0.9); color:#fff; background: rgba(178,0,0,0.06) }
 
+  .member-card img{
+  width: 120%;
+  height: 120%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
   /* detail panel (appears when a member clicked) */
   .detail-panel{
     margin-top:40px;
@@ -178,11 +185,26 @@
       <!-- horizontal carousel (names only per your choice B) -->
       <div class="carousel-wrap" aria-hidden="false">
         <div class="carousel" id="nameCarousel" tabindex="0" aria-label="Team members carousel">
-          <div class="member-card" data-index="0">Syerra Ardelia Irawan</div>
-          <div class="member-card" data-index="1">Alya Nadhifah</div>
-          <div class="member-card" data-index="2">Disa Nadina</div>
-          <div class="member-card" data-index="3">Sabina Laiqa</div>
-          <div class="member-card" data-index="4">Nemima Nathalia Sinaga</div>
+          <div class="member-card" data-index="0">
+            <img src="images/Syera.jpg" alt="Syerra">
+          </div>
+
+          <div class="member-card" data-index="1">
+            <img src="images/Alya.jpg" alt="Alya">
+          </div>
+
+          <div class="member-card" data-index="2">
+            <img src="images/Nadin.jpg" alt="Disa">
+          </div>
+
+          <div class="member-card" data-index="3">
+            <img src="images/Sabina.jpg" alt="Sabina">
+          </div>
+
+          <div class="member-card" data-index="4">
+             <img src="images/Mima.jpg" alt="Nemima">
+          </div>
+
         </div>
       </div>
 
