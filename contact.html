@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Nun Universe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Cinzel, serif;
+    }
+
+    /* HEADER */
+    body {
+      background: url(images/Universe.JPG) center / cover no-repeat;
+      color: #f2f2f2;
+      overflow-x: hidden;
+      transition: opacity 0.4s ease;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 40px 60px;
+      font-weight: 500;
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    header div {
+      font-size: 22px;
+      letter-spacing: 3px;
+      cursor: pointer;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #f2f2f2;
+      margin-left: 30px;
+      border: 1px solid #f2f2f2;
+      border-radius: 20px;
+      padding: 6px 20px;
+      transition: 0.3s;
+      font-size: 15px;
+    }
+
+    nav a:hover, nav a.active {
+      background-color: #f2f2f2;
+      color: #111;
+    }
+
+    .fade-out {
+      opacity: 0;
+    }
+
+    .fade-in {
+      opacity: 0;
+    }
+
+    footer { 
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: #999;
+      background: #0a0a0a;
+    }
+  </style>
+</head> 
+<body>
+<header>
+  <div id="homeHeader">THE NUN UNIVERSE</div>
+  <nav>
+    <a href="homepage.html" id="homeMenu">HOME</a>
+    <a href="universe.html" id="universeMenu">UNIVERSE</a>
+    <a href="about.html" id="aboutMenu">ABOUT</a>
+    <a class="active" id="contactMenu">CONTACT</a>
+  </nav>
+</header>
+
+<section id="contact" style="
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: 'Cinzel', serif;
+    background: url('images/Universe.JPG') no-repeat center center/cover;
+    ">
+
+    <div style="
+        position: absolute;
+        inset: 0;
+        background: rgba(0,0,0,0.72);
+        backdrop-filter: blur(2px);
+    "></div>
+
+    <div style="position: relative; text-align: center; margin-bottom: 60px;">
+        <h1 style="
+            font-size: 56px;
+            font-weight: 700;
+            letter-spacing: 6px;
+            border: 3px solid rgba(255,255,255,0.85);
+            padding: 16px 42px;
+            text-shadow: 0 0 18px red;
+        ">
+            CONTACT US
+        </h1>
+    </div>
+
+    <p style="
+        position: relative;
+        font-size: 30px;
+        opacity: .8;
+        margin-bottom: 90px;
+        text-align: center;
+        text-shadow: 0 0 8px crimson;
+    ">
+        Get in touch with the shadows...
+    </p>
+
+    <!-- CONTACT ITEMS -->
+    <div style="
+        position: relative;
+        width: 80%;
+        max-width: 1100px;
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+    ">
+
+        <!-- PHONE -->
+        <a style="flex: 1; text-decoration: none; color: white;">
+            <div style="text-align: center; cursor: pointer;">
+                <div style="
+                    font-size: 40px;
+                    margin-bottom: 14px;
+                    color: crimson;
+                    text-shadow: 0 0 6px red;
+                ">📞</div>
+                <h2 style="font-size: 20px; margin-bottom: 10px;">PHONE</h2>
+                <p style="font-size: 17px; opacity: .8;">818–954–2652</p>
+            </div>
+        </a>
+
+        <div style="width: 2px; background: rgba(255,255,255,0.18);"></div>
+
+        <!-- IG -->
+        <a href="https://www.instagram.com/thenunmovie?igsh=MXh4d21hOTduM2ZmMg==" target="_blank" style="flex: 1; text-decoration: none; color: white;">
+            <div style="text-align: center; cursor: pointer;">
+                <div style="
+                    font-size: 40px;
+                    margin-bottom: 14px;
+                    color: crimson;
+                    text-shadow: 0 0 6px red;
+                ">📷</div>
+                <h2 style="font-size: 20px; margin-bottom: 10px;">INSTAGRAM</h2>
+                <p style="font-size: 17px; opacity: .8;">@thenunmovie</p>
+            </div>
+        </a>
+
+        <div style="width: 2px; background: rgba(255,255,255,0.18);"></div>
+
+        <!-- EMAIL -->
+        <a href="mailto:Thenunshadow@gmail.com" style="flex: 1; text-decoration: none; color: white;">
+            <div style="text-align: center; cursor: pointer;">
+                <div style="
+                    font-size: 40px;
+                    margin-bottom: 14px;
+                    color: crimson;
+                    text-shadow: 0 0 6px red;
+                ">✉</div>
+                <h2 style="font-size: 20px; margin-bottom: 10px;">EMAIL</h2>
+                <p style="font-size: 17px; opacity: .8;">Thenunshadow@gmail.com</p>
+            </div>
+        </a>
+    </div>
+
+    <p style="
+        position: relative;
+        margin-top: 120px;
+        font-size: 30px;
+        opacity: .7;
+    ">
+        If the silence answers... run.
+    </p>
+</section>
+
+<footer>
+  &copy; 2025 The Nun Universe | Fan Concept Website by Kelompok 3
+</footer>
+
+</body>
+
+<script>
+  // Fade-in saat halaman dibuka
+  window.addEventListener("DOMContentLoaded", () => {
+    document.body.classList.add("show");
+  });
+
+  // Function pindah halaman dengan fade-out
+  function goToPageWithFade(url) {
+    document.body.classList.remove("show"); // mulai fade out
+    document.body.classList.add("fade-out");
+
+    setTimeout(() => {
+      window.location.href = url;
+    }, 400); // HARUS sama dengan transition CSS
+  }
+</script>
+
+</html>
+</html>

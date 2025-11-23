@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>About — The Nun Universe</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 40px 60px;
+      font-weight: 500;
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    header div {
+      font-size: 22px;
+      letter-spacing: 3px;
+      cursor: pointer;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #f2f2f2;
+      margin-left: 30px;
+      border: 1px solid #f2f2f2;
+      border-radius: 20px;
+      padding: 6px 20px;
+      transition: 0.3s;
+      font-size: 15px;
+    }
+
+    nav a:hover, nav a.active {
+      background-color: #f2f2f2;
+      color: #111;
+    }
+
+    .fade-out {
+      opacity: 0;
+    }
+
+    .fade-in {
+      opacity: 0;
+    }
+
+  :root{
+    --bg-dark:#070707;
+    --panel:#0f0f0f;
+    --accent:#b20000;
+    --muted: rgba(255,255,255,0.75);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:#000;color:#fff;font-family:"Cinzel",serif; -webkit-font-smoothing:antialiased;}
+  /* full-section bg */
+  .about-hero{
+    min-height:100vh;
+    padding:110px 40px 80px;
+    background: url('/mnt/data/IMG_2684.JPG') center/cover no-repeat fixed;
+    position:relative;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    overflow:hidden;
+  }
+  .about-hero::after{
+    content:"";
+    position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.66), rgba(0,0,0,0.78));
+  }
+
+  .about-inner{
+    position:relative; z-index:2; width:100%; max-width:1200px;
+  }
+
+  .about-head{
+    text-align:center;
+    margin-bottom:36px;
+  }
+  .about-head h2{
+    color:var(--accent);
+    font-size:36px;
+    margin:0 0 8px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+  }
+  .about-head p{
+    margin:0; color:var(--muted); max-width:880px; margin-left:auto;margin-right:auto; font-family:'Poppins',sans-serif;
+  }
+
+  /* carousel area (names only, tilted feel via transform on cards) */
+  .carousel-wrap{
+    margin-top:40px;
+  }
+  .carousel{
+    display:flex;
+    gap:18px;
+    padding:26px 12px;
+    overflow-x:auto;
+    scroll-behavior:smooth;
+    -webkit-overflow-scrolling:touch;
+    align-items:flex-end;
+  }
+  .carousel::-webkit-scrollbar{height:10px}
+  .carousel::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08); border-radius:8px}
+  .member-card{
+    min-width:180px;
+    max-width:220px;
+    height:220px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border:2px solid rgba(255,255,255,0.06);
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:18px;
+    cursor:pointer;
+    transform: rotate(-6deg) translateY(14px);
+    transition: transform .45s cubic-bezier(.2,.9,.2,1), box-shadow .28s;
+    box-shadow:0 8px 26px rgba(0,0,0,0.6);
+    font-family:'Poppins',sans-serif;
+    color:var(--accent);
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:1px;
+  }
+
+  .member-card.active-card {
+  border-color: rgba(178,0,0,0.9) !important;
+  box-shadow: 0 20px 40px rgba(178,0,0,0.25) !important;
+  transform: rotate(0deg) translateY(-8px) scale(1.03) !important;
+}
+
+  /* alternating tilt */
+  .member-card:nth-child(2n){ transform: rotate(6deg) translateY(6px); }
+  .member-card:hover{ transform: rotate(0deg) translateY(-8px) scale(1.03); box-shadow:0 20px 40px rgba(178,0,0,0.25); border-color: rgba(178,0,0,0.9); color:#fff; background: rgba(178,0,0,0.06) }
+
+  .member-card img{
+  width: 120%;
+  height: 120%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+  /* detail panel (appears when a member clicked) */
+  .detail-panel{
+    margin-top:40px;
+    background: linear-gradient(180deg, rgba(18,18,18,0.9), rgba(12,12,12,0.95));
+    border:1px solid rgba(178,0,0,0.12);
+    padding:28px;
+    border-radius:12px;
+    display:flex;
+    gap:22px;
+    align-items:flex-start;
+    transition: opacity .45s ease, transform .45s ease;
+  }
+  .detail-left{
+    width:100%;
+    min-height:200px;
+    padding:18px;
+    border-radius:8px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+  }
+  .detail-left h3{
+    margin:0 0 10px; color:var(--accent); font-size:28px; letter-spacing:2px;
+  }
+  .detail-left p{ margin:0 0 14px; color:var(--muted); font-family:'Poppins',sans-serif; line-height:1.6}
+  .detail-actions a{
+    display:inline-block;
+    background:transparent;
+    border:2px solid var(--accent);
+    color:var(--accent);
+    padding:8px 14px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:600;
+    transition: background .18s, color .18s;
+    font-family:'Poppins',sans-serif;
+  }
+  .detail-actions a:hover{ background:var(--accent); color:#111; }
+
+  .detail-right{
+    width:40%;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    align-items:center;
+    justify-content:flex-start;
+  }
+  .preview-box{
+    width:100%;
+    height:150px;
+    border-radius:8px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    display:flex; align-items:center; justify-content:center;
+    border:1px solid rgba(255,255,255,0.04);
+    color:var(--muted); font-family:'Poppins',sans-serif; padding:12px; text-align:center;
+  }
+
+  .thumbnails{
+    display:flex; gap:10px; margin-top:6px; flex-wrap:wrap; justify-content:center;
+  }
+  .thumb{
+    min-width:90px; height:60px; border-radius:8px; padding:8px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+    border:1px solid rgba(255,255,255,0.04);
+    display:flex; align-items:center; justify-content:center; color:var(--accent);
+    cursor:pointer; text-transform:uppercase; font-weight:700; font-family:'Poppins',sans-serif;
+  }
+  .thumb.active{ border-color:var(--accent); box-shadow:0 10px 28px rgba(178,0,0,0.22); color:#fff; background: rgba(178,0,0,0.06) }
+
+  /* responsive */
+  @media (max-width:900px){
+    .detail-panel{ flex-direction:column; }
+    .detail-left, .detail-right{ width:100% }
+    .member-card{ min-width:150px; height:160px; }
+  }
+
+  footer { 
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: #999;
+      background: #0a0a0a;
+    }
+</style>
+</head>
+<body>
+<header>
+  <div id="homeHeader">THE NUN UNIVERSE</div>
+  <nav>
+    <a onclick="goToPageWithFade('homepage.html')" id="homeMenu">HOME</a>
+    <a onclick="goToPageWithFade('universe.html')" id="universeMenu">UNIVERSE</a>
+    <a class="active" id="aboutMenu">ABOUT</a>
+    <a onclick="goToPageWithFade('contact.html')" id="contactMenu">CONTACT</a>
+  </nav>
+</header>
+
+  <section class="about-hero" id="about">
+    <div class="about-inner" role="region" aria-label="About The Nun — Team">
+      <div class="about-head">
+        <h2>ABOUT US — KELOMPOK 3</h2>
+        <p>Click any member to view details — Instagram and quick info are available.</p>
+      </div>
+
+      <!-- horizontal carousel (names only per your choice B) -->
+      <div class="carousel-wrap" aria-hidden="false">
+        <div class="carousel" id="nameCarousel" tabindex="0" aria-label="Team members carousel">
+          <div class="member-card" data-index="0">
+            <img src="images/Syera.jpg" alt="Syerra">
+          </div>
+
+          <div class="member-card" data-index="1">
+            <img src="images/Alya.jpg" alt="Alya">
+          </div>
+
+          <div class="member-card" data-index="2">
+            <img src="images/Nadin.jpg" alt="Disa">
+          </div>
+
+          <div class="member-card" data-index="3">
+            <img src="images/Sabina.jpg" alt="Sabina">
+          </div>
+
+          <div class="member-card" data-index="4">
+             <img src="images/Mima.jpg" alt="Nemima">
+          </div>
+
+        </div>
+      </div>
+
+      <!-- detail panel (initially show first member) -->
+      <div class="detail-panel" id="detailPanel" aria-live="polite">
+        <div class="detail-left">
+          <h3 id="detailName">Syerra Ardelia Irawan</h3>
+          <p id="detailBio">
+            Syerra Ardelia Irawan — anggota Kelompok 3. Klik tombol Instagram untuk melihat profil.
+          </p>
+          <div class="detail-actions">
+            <a id="detailIG" href="https://www.instagram.com/syerraard?igsh=MXdvNWgyNHlpbzlzaw==" target="_blank" rel="noopener">Open Instagram</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+<footer>
+  &copy; 2025 The Nun Universe | Fan Concept Website by Kelompok 3
+</footer>
+
+
+<script>
+  // dataset for members (names + IG urls + short bios)
+  const members = [
+  {
+    name: "Syerra Ardelia Irawan",
+    ig: "https://www.instagram.com/syerraard?igsh=MXdvNWgyNHlpbzlzaw==",
+    bio: "Project Manager & Engineer — Responsible for overseeing all progress."
+  },
+  {
+    name: "Alya Nadhifah",
+    ig: "https://www.instagram.com/alyanadfh?igsh=MW9vb3F3a216bjJyMA==",
+    bio: "Engineer — Responsible for layout and responsive testing."
+  },
+  {
+    name: "Disa Nadina Liandra",
+    ig: "https://www.instagram.com/disanadin?igsh=MWxqM3ZmZDgxOXdjZw==",
+    bio: "Engineer & Designer — Responsible for graphic design and responsive testing."
+  },
+  {
+    name: "Sabina Laiqa",
+    ig: "https://www.instagram.com/s4b1naa?igsh=b20xZmhpczR2Ynps",
+    bio: "Developer — Responsible for typography, web visual design, and material collection."
+  },
+  {
+    name: "Nemima Nathalia Sinaga",
+    ig: "https://www.instagram.com/nemimantl_12?igsh=MTlmMXN1OWlhbjhqMg==",
+    bio: "Developer — Responsible for color selection, web visual design, and material collection."
+  }
+];
+
+  // elements
+  const carousel = document.getElementById('nameCarousel');
+  const cards = Array.from(document.querySelectorAll('.member-card'));
+  const detailName = document.getElementById('detailName');
+  const detailBio = document.getElementById('detailBio');
+  const detailIG = document.getElementById('detailIG');
+  const thumbs = Array.from(document.querySelectorAll('.thumb'));
+
+  // initialize state
+  let current = 0;
+  function showMember(index, options = { scrollIntoView:true }){
+    if(index < 0 || index >= members.length) return;
+    current = index;
+    const m = members[index];
+    detailName.textContent = m.name;
+    detailBio.textContent = m.bio;
+    detailIG.href = m.ig;
+    // thumb active
+    thumbs.forEach(t => t.classList.toggle('active', Number(t.dataset.index) === index));
+    // ensure clicked card visible in carousel
+    const card = cards[index];
+    if(options.scrollIntoView && card){
+      const left = card.offsetLeft - (carousel.clientWidth/2) + (card.clientWidth/2);
+      carousel.scrollTo({ left, behavior: 'smooth' });
+    }
+  }
+
+  // click on carousel cards
+  cards.forEach(c=>{
+  c.addEventListener('click', ()=>{
+    const idx = Number(c.dataset.index);
+    showMember(idx);
+
+    // remove active from all
+    cards.forEach(card => card.classList.remove('active-card'));
+
+    // add to selected
+    c.classList.add('active-card');
+
+    // animation
+    c.animate([{ transform: 'scale(1.02)' }, { transform:'scale(1)' }], { duration:220 });
+  });
+});
+
+
+  // click thumbnails
+  thumbs.forEach(t=>{
+  t.addEventListener('click', ()=>{
+    const idx = Number(t.dataset.index);
+    
+    // tampilkan detail
+    showMember(idx, { scrollIntoView:true });
+
+    // hapus active-card dari semua foto
+    cards.forEach(card => card.classList.remove('active-card'));
+    
+    // kasih active-card ke foto yang sesuai
+    cards[idx].classList.add('active-card');
+  });
+});
+
+
+  // allow keyboard navigation when focus is on carousel (left/right)
+  carousel.addEventListener('keydown', (e)=>{
+    if(e.key === 'ArrowRight') showMember(Math.min(current+1, members.length-1));
+    if(e.key === 'ArrowLeft') showMember(Math.max(current-1, 0));
+  });
+
+  // enable drag-to-scroll on carousel (desktop)
+  (function enableDragScroll(el){
+    let isDown=false, startX, scrollLeft;
+    el.addEventListener('mousedown', (e)=>{
+      isDown = true;
+      el.classList.add('dragging');
+      startX = e.pageX - el.offsetLeft;
+      scrollLeft = el.scrollLeft;
+      e.preventDefault();
+    });
+    window.addEventListener('mouseup', ()=>{ isDown = false; el.classList.remove('dragging'); });
+    el.addEventListener('mousemove', (e)=>{
+      if(!isDown) return;
+      const x = e.pageX - el.offsetLeft;
+      const walk = (x - startX) * 1.4;
+      el.scrollLeft = scrollLeft - walk;
+    });
+    // touch support (mobile)
+    let startTouchX = 0, startTouchScroll = 0;
+    el.addEventListener('touchstart', (e)=>{ startTouchX = e.touches[0].clientX; startTouchScroll = el.scrollLeft; });
+    el.addEventListener('touchmove', (e)=>{
+      const dx = e.touches[0].clientX - startTouchX;
+      el.scrollLeft = startTouchScroll - dx;
+    }, {passive:true});
+  })(carousel);
+
+  // init show first member
+  showMember(0, { scrollIntoView:false });
+  cards[0].classList.add('active-card');
+
+  // nice hint: focus carousel for keyboard nav when user clicks anywhere inside
+  carousel.addEventListener('click', ()=> carousel.focus());
+
+  // accessibility: allow Enter key to open selected card when focused
+  cards.forEach(c=>{
+    c.tabIndex = 0;
+    c.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        c.click();
+      }
+    });
+  });
+
+  // Fade-in saat halaman dibuka
+  window.addEventListener("DOMContentLoaded", () => {
+    document.body.classList.add("show");
+  });
+
+  // Function pindah halaman dengan fade-out
+  function goToPageWithFade(url) {
+    document.body.classList.remove("show"); // mulai fade out
+    document.body.classList.add("fade-out");
+
+    setTimeout(() => {
+      window.location.href = url;
+    }, 400); // HARUS sama dengan transition CSS
+  }
+</script>
+</body>
+</html>
