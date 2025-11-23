@@ -6,6 +6,40 @@
 <title>About — The Nun Universe</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
+  header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 40px 60px;
+      font-weight: 500;
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    header div {
+      font-size: 22px;
+      letter-spacing: 3px;
+      cursor: pointer;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #f2f2f2;
+      margin-left: 30px;
+      border: 1px solid #f2f2f2;
+      border-radius: 20px;
+      padding: 6px 20px;
+      transition: 0.3s;
+      font-size: 15px;
+    }
+
+    nav a:hover, nav a.active {
+      background-color: #f2f2f2;
+      color: #111;
+    }
+
+    .fade { opacity: 0; }
   :root{
     --bg-dark:#070707;
     --panel:#0f0f0f;
@@ -86,6 +120,13 @@
     text-transform:uppercase;
     letter-spacing:1px;
   }
+
+  .member-card.active-card {
+  border-color: rgba(178,0,0,0.9) !important;
+  box-shadow: 0 20px 40px rgba(178,0,0,0.25) !important;
+  transform: rotate(0deg) translateY(-8px) scale(1.03) !important;
+}
+
   /* alternating tilt */
   .member-card:nth-child(2n){ transform: rotate(6deg) translateY(6px); }
   .member-card:hover{ transform: rotate(0deg) translateY(-8px) scale(1.03); box-shadow:0 20px 40px rgba(178,0,0,0.25); border-color: rgba(178,0,0,0.9); color:#fff; background: rgba(178,0,0,0.06) }
@@ -174,6 +215,15 @@
 </style>
 </head>
 <body>
+<header>
+  <div id="homeHeader">THE NUN UNIVERSE</div>
+  <nav>
+    <a id="homeMenu">HOME</a>
+    <a id="universeMenu">UNIVERSE</a>
+    <a class="active" id="aboutMenu">ABOUT</a>
+    <a id="contactMenu">CONTACT</a>
+  </nav>
+</header>
 
   <section class="about-hero" id="about">
     <div class="about-inner" role="region" aria-label="About The Nun — Team">
@@ -218,19 +268,12 @@
           <div class="detail-actions">
             <a id="detailIG" href="https://www.instagram.com/syerraard?igsh=MXdvNWgyNHlpbzlzaw==" target="_blank" rel="noopener">Open Instagram</a>
           </div>
+          
         </div>
-
+      </div>
         <div class="detail-right">
           <div class="preview-box" id="previewBox">
-            BIO / QUICK NOTES
-          </div>
 
-          <div class="thumbnails" id="thumbs">
-            <div class="thumb active" data-index="0">Syerra</div>
-            <div class="thumb" data-index="1">Alya</div>
-            <div class="thumb" data-index="2">Disa</div>
-            <div class="thumb" data-index="3">Sabina</div>
-            <div class="thumb" data-index="4">Nemima</div>
           </div>
         </div>
       </div>
@@ -298,21 +341,38 @@
 
   // click on carousel cards
   cards.forEach(c=>{
-    c.addEventListener('click', ()=>{
-      const idx = Number(c.dataset.index);
-      showMember(idx);
-      // subtle focus/animation
-      c.animate([{ transform: 'scale(1.02)' }, { transform:'scale(1)' }], { duration:220 });
-    });
+  c.addEventListener('click', ()=>{
+    const idx = Number(c.dataset.index);
+    showMember(idx);
+
+    // remove active from all
+    cards.forEach(card => card.classList.remove('active-card'));
+
+    // add to selected
+    c.classList.add('active-card');
+
+    // animation
+    c.animate([{ transform: 'scale(1.02)' }, { transform:'scale(1)' }], { duration:220 });
   });
+});
+
 
   // click thumbnails
   thumbs.forEach(t=>{
-    t.addEventListener('click', ()=>{
-      const idx = Number(t.dataset.index);
-      showMember(idx, { scrollIntoView:true });
-    });
+  t.addEventListener('click', ()=>{
+    const idx = Number(t.dataset.index);
+    
+    // tampilkan detail
+    showMember(idx, { scrollIntoView:true });
+
+    // hapus active-card dari semua foto
+    cards.forEach(card => card.classList.remove('active-card'));
+    
+    // kasih active-card ke foto yang sesuai
+    cards[idx].classList.add('active-card');
   });
+});
+
 
   // allow keyboard navigation when focus is on carousel (left/right)
   carousel.addEventListener('keydown', (e)=>{
@@ -348,6 +408,7 @@
 
   // init show first member
   showMember(0, { scrollIntoView:false });
+  cards[0].classList.add('active-card');
 
   // nice hint: focus carousel for keyboard nav when user clicks anywhere inside
   carousel.addEventListener('click', ()=> carousel.focus());
