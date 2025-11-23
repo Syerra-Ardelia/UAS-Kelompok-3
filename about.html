@@ -151,7 +151,7 @@
     transition: opacity .45s ease, transform .45s ease;
   }
   .detail-left{
-    width:60%;
+    width:100%;
     min-height:200px;
     padding:18px;
     border-radius:8px;
@@ -268,13 +268,7 @@
           <div class="detail-actions">
             <a id="detailIG" href="https://www.instagram.com/syerraard?igsh=MXdvNWgyNHlpbzlzaw==" target="_blank" rel="noopener">Open Instagram</a>
           </div>
-          
-        </div>
-      </div>
-        <div class="detail-right">
-          <div class="preview-box" id="previewBox">
 
-          </div>
         </div>
       </div>
     </div>
@@ -283,32 +277,32 @@
 <script>
   // dataset for members (names + IG urls + short bios)
   const members = [
-    {
-      name: "Syerra Ardelia Irawan",
-      ig: "https://www.instagram.com/syerraard?igsh=MXdvNWgyNHlpbzlzaw==",
-      bio: "Syerra Ardelia Irawan — anggota Kelompok 3. Kontributor dalam kelompok yang bertanggung jawab atas semua progres."
-    },
-    {
-      name: "Alya Nadhifah",
-      ig: "https://www.instagram.com/alyanadfh?igsh=MW9vb3F3a216bjJyMA==",
-      bio: "Alya Nadhifah — anggota Kelompok 3. Bertanggung jawab pada layout, tipografi dan uji responsif."
-    },
-    {
-      name: "Disa Nadina",
-      ig: "https://www.instagram.com/disanadin?igsh=MWxqM3ZmZDgxOXdjZw==",
-      bio: "Disa Nadina — anggota Kelompok 3. Desain grafis, pemilihan warna, dan moodboard horor."
-    },
-    {
-      name: "Sabina Laiqa",
-      ig: "https://www.instagram.com/s4b1naa?igsh=b20xZmhpczR2Ynps",
-      bio: "Sabina Laiqa — anggota Kelompok 3. Berkoordinasi dalam mengatur aset dan pengumpulan materi."
-    },
-    {
-      name: "Nemima Nathalia Sinaga",
-      ig: "https://www.instagram.com/nemimantl_12?igsh=MTlmMXN1OWlhbjhqMg==",
-      bio: "Nemima Nathalia Sinaga — anggota Kelompok 3. Berkontribusi dalam dokumentasi dan manajemen file ."
-    }
-  ];
+  {
+    name: "Syerra Ardelia Irawan",
+    ig: "https://www.instagram.com/syerraard?igsh=MXdvNWgyNHlpbzlzaw==",
+    bio: "Syerra Ardelia Irawan — project manager and engineer of Group 3. Responsible for overseeing all progress."
+  },
+  {
+    name: "Alya Nadhifah",
+    ig: "https://www.instagram.com/alyanadfh?igsh=MW9vb3F3a216bjJyMA==",
+    bio: "Alya Nadhifah — engineer of Group 3. Responsible for layout and responsive testing."
+  },
+  {
+    name: "Disa Nadina Liandra",
+    ig: "https://www.instagram.com/disanadin?igsh=MWxqM3ZmZDgxOXdjZw==",
+    bio: "Disa Nadina — engineer and designer of Group 3. Responsible for graphic design and responsive testing."
+  },
+  {
+    name: "Sabina Laiqa",
+    ig: "https://www.instagram.com/s4b1naa?igsh=b20xZmhpczR2Ynps",
+    bio: "Sabina Laiqa — developer of Group 3. Responsible for typography, web visual design, and material collection."
+  },
+  {
+    name: "Nemima Nathalia Sinaga",
+    ig: "https://www.instagram.com/nemimantl_12?igsh=MTlmMXN1OWlhbjhqMg==",
+    bio: "Nemima Nathalia Sinaga — developer of Group 3. Responsible for color selection, web visual design, and material collection."
+  }
+];
 
   // elements
   const carousel = document.getElementById('nameCarousel');
@@ -316,7 +310,6 @@
   const detailName = document.getElementById('detailName');
   const detailBio = document.getElementById('detailBio');
   const detailIG = document.getElementById('detailIG');
-  const previewBox = document.getElementById('previewBox');
   const thumbs = Array.from(document.querySelectorAll('.thumb'));
 
   // initialize state
@@ -328,7 +321,6 @@
     detailName.textContent = m.name;
     detailBio.textContent = m.bio;
     detailIG.href = m.ig;
-    previewBox.textContent = m.bio;
     // thumb active
     thumbs.forEach(t => t.classList.toggle('active', Number(t.dataset.index) === index));
     // ensure clicked card visible in carousel
