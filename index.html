@@ -13,14 +13,25 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Cinzel', serif;
+      font-family: Cinzel, serif;
     }
 
+    /* HEADER */
     body {
       background-color: #0a0a0a;
       color: #f2f2f2;
       overflow-x: hidden;
-      transition: opacity 0.4s ease; }
+      transition: opacity 0.4s ease;
+      opacity: 0;
+    }
+
+    body.show {
+      opacity: 1;
+    }
+
+    body.fade-out {
+    opacity: 0
+    }
 
     header {
       display: flex;
@@ -31,7 +42,6 @@
       position: fixed;
       width: 100%;
       z-index: 1000;
-
     }
 
     header div {
@@ -53,11 +63,19 @@
 
     nav a:hover, nav a.active {
       background-color: #f2f2f2;
-      color: #111; }
+      color: #111;
+    }
 
-    .fade { opacity: 0; }
+    .fade-out {
+      opacity: 0;
+    }
 
-    /* HOME SECTION */
+    .fade-in {
+      opacity: 0;
+    }
+
+    /* HOMEPAGE */
+    
     .container {
       display: flex;
       flex-direction: column;
@@ -65,7 +83,7 @@
       justify-content: center;
       height: 100vh;
       text-align: center;
-      background: url(images/HOMEPAGE3.jpg) center / cover no-repeat;
+      background: url(images/depan-valak.JPG) center / cover no-repeat;
       position: relative;
       transition: opacity 0.8s ease-in-out;
     }
@@ -74,15 +92,15 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: rgba(0,0,0,0.6);
+      background: rgba(0,0,0,0.3);
     }
 
     .logo {
       width: 500px;
+      display: flex;
       display: absolute;
       flex-direction: column;
       align-items: center;
-      margin-top: 125px;
       max-width: 80%;
       z-index: 2;
       position: relative;
@@ -91,6 +109,7 @@
 
     .buttons {
       margin-top: 50px;
+      align-items: center;
       z-index: 2;
       position: relative;
     }
@@ -116,178 +135,13 @@
 
     .tagline {
       margin-top: 40px;
+      align-items: center;
       font-style: italic;
       font-size: 25px;
       color: #ddd;
       z-index: 2;
       position: relative;
       text-align: center;
-    }
-
-    /* CONTENT PAGES */
-    .content {
-      display: flex;
-      height: 100vh;
-      padding: 20px 20px;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-      align-items: center;
-      justify-content: center;
-      padding-top: 200px;
-    }
-
-    .content.active {
-      display: block;
-      opacity: 1;
-    }
-
-    #nun1 {
-      background: url('images/HOMEPAGE.jpg') center/cover no-repeat;
-    }
-
-    #nun2 {
-      background: url('images/HOMEPAGE2.jpg') center/cover no-repeat;
-    }
-
-    #universe, #about, #contact {
-      display: none;
-      padding-top: 200px;
-      height: 100vh;
-      font-size: 40px;
-      text-align: center;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-
-    #universe.active, #about.active, #contact.active {
-      display: block;
-      opacity: 1;
-    }
-
-    .movie-box {
-      background-color: rgba(255,255,255,0.05);
-      border-radius: 20px;
-      padding: 100px;
-      width: 80%;
-      max-width: 900px;
-      margin:auto;
-      text-align: center;
-      align-items: center;
-    }
-
-    .movie-box p {
-      color: #ccc;
-      line-height: 1.7;
-      font-size: 16px;
-      text-align: justify;
-    }
-
-    .btn {
-      margin-top: 15px;
-      display: block;
-      border: 1px solid #f2f2f2;
-      border-radius: 20px;
-      padding: 12px 25px;
-      background: transparent;
-      cursor: pointer;
-      color: #f2f2f2;
-      transition: 0.3s;
-      margin-left: auto;
-      margin-right: auto;
-      font-size: 18px;
-      font-weight: 600;
-    }
-
-    .btn:hover {
-      background-color: #f2f2f2;
-      color: #111;
-    }
-
-    /* POPUP */
-    #charPopup { 
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.0);
-      backdrop-filter: blur(0px);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 2000;
-      transition: background 0.4s ease;
-    }
-
-    #charPopup.visible {
-      background: rgba(0,0,0,0.85);
-      backdrop-filter: blur(6px);
-    }
-
-    #charPopup .popup-box {
-      background: #111;
-      padding: 30px;
-      border-radius: 20px;
-      width: 520px;
-      text-align: center;
-      box-shadow: 0 0 20px rgba(255,255,255,0.3);
-      position: relative;
-      transform: scale(0.7);
-      opacity: 0;
-      transition: 0.3s ease;
-    }
-
-    #charPopup.visible .popup-box {
-      transform: scale(1);
-      opacity: 1;
-    }
-
-    #charList {
-      max-width: 100%;
-      overflow-x: auto;
-      white-space: nowrap;
-      margin-top: 25px;
-      padding-bottom: 10px;
-      scroll-behavior: smooth;
-    }
-
-    .charCard {
-      display: inline-block;
-      width: 170px;
-      height: 260px;
-      margin: 0 12px;
-      border-radius: 15px;
-      overflow: hidden;
-      border: 2px solid #444;
-      box-shadow: 0 0 10px rgba(255,255,255,0.2);
-      background-size: cover;
-      background-position: center;
-      position: relative;
-    }
-
-    .charCard span {
-      position: absolute;
-      bottom: 0; left: 0;
-      right: 0;
-      padding: 8px;
-      font-size: 15px;
-      background: rgba(0,0,0,0.6);
-    }
-
-    .arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 40px;
-      cursor: pointer;
-      color: #fff;
-      padding: 10px;
-      user-select: none;
-    }
-
-    #leftArrow {
-      left: -50px;
-    }
-
-    #rightArrow {
-      right: -50px;
     }
 
     footer { 
@@ -297,142 +151,52 @@
       color: #999;
       background: #0a0a0a;
     }
+
   </style>
 </head>
+
 <body>
 
 <header>
   <div id="homeHeader">THE NUN UNIVERSE</div>
   <nav>
-    <a href="#" class="active" id="homeMenu">HOME</a>
-    <a href="#" id="universeMenu">UNIVERSE</a>
-    <a href="#" id="aboutMenu">ABOUT</a>
-    <a href="#" id="contactMenu">CONTACT</a>
+    <a class="active" id="homeMenu">HOME</a>
+    <a onclick="goToPageWithFade('universe.html')" id="universeMenu">UNIVERSE</a>
+    <a onclick="goToPageWithFade('about.html')" id="aboutMenu">ABOUT</a>
+    <a onclick="goToPageWithFade('contact.html')" id="contactMenu">CONTACT</a>
   </nav>
 </header>
 
 <div class="container" id="home">
   <img src="images/The_Nun_Movie_Logo.png" alt="The Nun Logo" class="logo">
   <div class="buttons">
-    <button id="btnNun1">The Nun (2018)</button>
-    <button id="btnNun2">The Nun II (2023)</button>
+    <button onclick="goToPageWithFade('sinopsis_the_nun_1.html')" id="btnNun1">The Nun (2018)</button>
+    <button onclick="goToPageWithFade('sinopsis_the_nun_2.html')" id="btnNun2">The Nun II (2023)</button>
   </div>
   <p class="tagline">“Step into the shadows and face the horror that binds them.”</p>
-</div>
-
-<div class="content" id="nun1">
-  <div class="movie-box">
-    <h1>THE NUN (2018)</h1>
-    <br><br>
-    <p>In a remote Romanian abbey, a nun is found dead under mysterious circumstances, prompting the Vatican to send Father Burke and Sister Irene to investigate, with the help of a local villager named Frenchie. Inside the abbey, they uncover that an ancient demon called Valak has been unleashed and is terrorizing anyone who enters. After facing a series of terrifying supernatural events, they manage to seal Valak again using a relic containing the blood of Jesus though subtle signs hint that the evil hasn’t been completely destroyed.</p>
-    <button class="btn" id="seeChar1">See Characters</button>
-  </div>
-</div>
-
-<div class="content" id="nun2">
-  <div class="movie-box">
-    <h1>THE NUN II (2023)</h1>
-    <p>Five years after the events in Romania, Sister Irene is drawn back into danger when a chain of brutal deaths across Europe points to the resurgence of Valak. Meanwhile, Frenchie now working at an old boarding school in France unknowingly serves as Valak’s host, as the demon slowly tries to possess him fully. Irene must confront Valak once more, racing against time to save Frenchie and stop the demon before its power becomes unstoppable</p>
-    <button class="btn" id="seeChar2">See Characters</button>
-  </div>
-</div>
-
-<div id="universe">UNIVERSE PAGE (Empty for now)</div>
-<div id="about">ABOUT PAGE (Empty)</div>
-<div id="contact">CONTACT PAGE (Empty)</div>
-
-<div id="charPopup">
-  <div class="popup-box">
-    <span id="closeX" style="position:absolute; top:15px; right:20px; font-size:28px; cursor:pointer; color:#fff;">✕</span>
-    <div id="leftArrow" class="arrow">❮</div>
-    <h2 id="charTitle">Characters</h2>
-    <div id="charList"></div>
-    <div id="rightArrow" class="arrow">❯</div>
-    <button class="btn" onclick="closePopup()">Close</button>
-  </div>
 </div>
 
 <footer>
   &copy; 2025 The Nun Universe | Fan Concept Website by Kelompok 3
 </footer>
 
-<script>
-  /* PAGE SWITCHING WITH TRANSITION */
-  function fadeTo(element) {
-    document.body.classList.add('fade');
-    setTimeout(() => {
-      showOnly(element);
-      document.body.classList.remove('fade');
-    }, 300);
-  }
-
-  function showOnly(id) {
-    document.querySelectorAll('.content, #home, #universe, #about, #contact').forEach(e => e.classList.remove('active'));
-    document.querySelectorAll('#home, .content, #universe, #about, #contact').forEach(e => e.style.display = 'none');
-
-    const el = document.getElementById(id);
-    el.style.display = 'block';
-    setTimeout(() => el.classList.add('active'), 20);
-  }
-
-  document.getElementById('homeMenu').onclick = e => { e.preventDefault(); fadeTo('home'); };
-  document.getElementById('homeHeader').onclick = () => fadeTo('home');
-
-  document.getElementById('universeMenu').onclick = e => { e.preventDefault(); fadeTo('universe'); };
-  document.getElementById('aboutMenu').onclick = e => { e.preventDefault(); fadeTo('about'); };
-  document.getElementById('contactMenu').onclick = e => { e.preventDefault(); fadeTo('contact'); };
-
-  document.getElementById('btnNun1').onclick = () => fadeTo('nun1');
-  document.getElementById('btnNun2').onclick = () => fadeTo('nun2');
-
-  /* POPUP */
-  const imagesNun1 = [
-    { name: "Valak", img: "Valak the nun 1.jpg" },
-    { name: "Maurice", img: "Frenchie . The nun 1.JPG" },
-    { name: "Sister Irene", img: "Sister irene . The nun 1.jpg" },
-    { name: "Father Burke", img: "Father burke - the nun 1.jpg" },
-    { name: "Sister Oana", img: "Sister oana.jpg" }
-  ];
-
-  const imagesNun2 = [
-    { name: "Maurice Theriault", img: "Maurice_Theriault.jpg" },
-    { name: "Sister Debra", img: "Sister_Debra.jpg" },
-    { name: "Sister Irene", img: "Sister_Irene.jpg" },
-    { name: "Sophie", img: "Sophie.jpg" },
-    { name: "Valak", img: "Valak.jpg" }
-  ];
-
-  const popup = document.getElementById('charPopup');
-  const charList = document.getElementById('charList');
-  const charTitle = document.getElementById('charTitle');
-
-  document.getElementById('seeChar1').onclick = () => openPopup(imagesNun1, "The Nun (2018) – Characters");
-  document.getElementById('seeChar2').onclick = () => openPopup(imagesNun2, "The Nun II (2023) – Characters");
-
-  function openPopup(data, title) {
-    popup.style.display = 'flex';
-    setTimeout(() => popup.classList.add('visible'), 10);
-    charList.innerHTML = "";
-    charTitle.innerText = title;
-    data.forEach(c => {
-      const card = document.createElement('div');
-      card.className = "charCard";
-      card.style.backgroundImage = `url('images/${c.img}')`;
-      card.innerHTML = `<span>${c.name}</span>`;
-      charList.appendChild(card);
-    });
-  }
-
-  function closePopup() {
-    popup.classList.remove('visible');
-    setTimeout(() => popup.style.display = 'none', 300);
-  }
-
-  document.getElementById('rightArrow').onclick = () => (charList.scrollLeft += 220);
-  document.getElementById('leftArrow').onclick  = () => (charList.scrollLeft -= 220);
-
-  charList.addEventListener('wheel', e => { e.preventDefault(); charList.scrollLeft += e.deltaY; });
-  document.getElementById('closeX').onclick = closePopup;
-</script>
 </body>
+<script>
+  // Fade-in saat halaman dibuka
+  window.addEventListener("DOMContentLoaded", () => {
+    document.body.classList.add("show");
+  });
+
+  // Function pindah halaman dengan fade-out
+  function goToPageWithFade(url) {
+    document.body.classList.remove("show"); // mulai fade out
+    document.body.classList.add("fade-out");
+
+    setTimeout(() => {
+      window.location.href = url;
+    }, 400); // HARUS sama dengan transition CSS
+  }
+</script>
+
+</html>
 </html>
